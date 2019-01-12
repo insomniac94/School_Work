@@ -1,2 +1,1 @@
-# School_Work
-This repo stores school work.
+This repository stores school work.
