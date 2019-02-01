@@ -1,4 +1,4 @@
-# You must install enchant for python before this script will work.
+# You must install enchant for python before this script will work
 
 import string
 import collections
