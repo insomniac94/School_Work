@@ -1,5 +1,14 @@
-# You must install enchant for python before this script will work
-
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# =============================================================
+# Created By  : Brandon Hough
+# Created Date: 03/07/2019
+# =============================================================
+"""This python script will decrypt any given ceasar cipher 
+decrypted text and output the decrypted message."""
+# =============================================================
+# Imports
+# =============================================================
 import string
 import collections
 import enchant
