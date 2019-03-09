@@ -1,69 +1,93 @@
+
+Conversation opened. 1 read message.
+
+Skip to content
+Using The University of Tennessee at Chattanooga Mail with screen readers
+1 of 760
+Project 3
+Brandon Hough <Brandon-Hough@mocs.utc.edu>
+	
+AttachmentsFri, Mar 8, 9:09 PM (5 hours ago)
+	
+to Li
+Dr. Yang,
+
+Is this how you want Part I to be done for project 3? I decided to do it in Python instead of Java.
+
+Regards,
+Brandon Hough
+
+2 Attachments
+	
+	
+	
+
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 # =============================================================
 # Created By  : Brandon Hough
 # Created Date: 03/07/2019
 # =============================================================
-"""This application will implement encryption of a plaintext 
-series of bytes, and decryption of the created cipher text"""
+"""This python script will implement DES3 and AES256 
+encryption and decryption"""
 # =============================================================
 # Imports
 # =============================================================
+from Crypto.Cipher import DES3
+from Crypto.Cipher import AES
+from Crypto import Random
 import base64
-import os
-from cryptography.fernet import Fernet
-from cryptography.hazmat.backends import default_backend
-from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-import pyDes
+import random
 
-def encrypt_decrypt_des(input_str):
+def encrypt_using_DES3(plaintext):
+	key = 'thisismykeyhomie'
+	iv= Random.new().read(DES3.block_size)
+	cipher_encrypt = DES3.new(key, DES3.MODE_OFB, iv)
+	encrypted_msg = cipher_encrypt.encrypt(plaintext)
+	print "Encrypted Message (DES3)"
+	print "="*24
+	print encrypted_msg
+	decrypt_using_DES3(encrypted_msg,iv,key)
 
-    print("\nDES ENCRYPTION")
-    print("="*24)
+def decrypt_using_DES3(encypted_msg,iv,key):
+	print "Decrypted Message (DES3)"
+	print "="*24
+	cipher_decrypt = DES3.new(key, DES3.MODE_OFB, iv)
+	decrypted_msg = cipher_decrypt.decrypt(encypted_msg)
+	print decrypted_msg
+	print '-'*24 
 
-    key = pyDes.des("DESCRYPT", pyDes.CBC, "\0\0\0\0\0\0\0\0", pad=None, padmode=pyDes.PAD_PKCS5)
-    decrypted_msg = key.encrypt(input_str)
-    #print("Key: %r" % key)
-    print("Encrypted: %r" % decrypted_msg)
-    print("Decrypted: %r" % key.decrypt(decrypted_msg))
+def encrypt_using_AES(plaintext):
+	print "Encrypted Message (AES)"
+	print "="*24
+	
+	#Get a random set of 16 characters for the key
+	key = ''.join(chr(random.randint(0, 0xFF)) for i in range(16))
 
-    '''
-    salt = os.urandom(16)
-    kdf = PBKDF2HMAC(
-        algorithm = hashes.SHA256(),
-        length = 32,
-        salt = salt,
-        iterations = 100000,
-        backend = default_backend()
-    )
+	#Get a random set of 16 characters for the initialization vector
+	iv = ''.join([chr(random.randint(0, 0xFF)) for i in range(16)])
 
-    password = b'testpassword'
-    key = base64.urlsafe_b64encode(kdf.derive(password))
+	aes = AES.new(key, AES.MODE_CBC, iv)
+	encrypted_msg = aes.encrypt(plaintext)
+	print encrypted_msg
+	decrypt_using_AES(encrypted_msg,key,iv)
 
-    print("Key: ")
-    print(key)
-    
-    f = Fernet(key)
-
-    token = f.encrypt(input_str)
-    print("\nEncrypted Message: ")
-    print(token)
-
-    print("\nDecrypted Message: ")
-    print(f.decrypt(token))
-    '''
-
-def encrypt_decrypt_aes(input_str):
-    print("\nAES ENCRYPTION")
-    print("="*24)
-
-
+def decrypt_using_AES(encrypted_msg,key,iv):	
+	print "Decrypted Message (AES)"
+	print "="*24 
+	aes = AES.new(key, AES.MODE_CBC, iv)
+	decrypted_msg = aes.decrypt(encrypted_msg)
+	print decrypted_msg
+	print '\n'
+	
 def main():
-    plain_text_msg = input('\nPlease input text to encrypt: ')
-    plain_text_msg = str.encode(plain_text_msg)
-    encrypt_decrypt_des(plain_text_msg)
-    encrypt_decrypt_aes(plain_text_msg)
+	msg = raw_input('\nPlease input text to encrypt (8 characters): ')
+	encrypt_using_DES3(msg)
+
+	msg = raw_input('\nPlease input text to encrypt (16 characters): ')
+	encrypt_using_AES(msg)
 
 if __name__ == '__main__':
-    main()
+	main()
+
+EncryDecry.py
+Displaying EncryDecry.py.
