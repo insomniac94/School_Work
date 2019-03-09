@@ -1,27 +1,3 @@
-
-Conversation opened. 1 read message.
-
-Skip to content
-Using The University of Tennessee at Chattanooga Mail with screen readers
-1 of 760
-Project 3
-Brandon Hough <Brandon-Hough@mocs.utc.edu>
-	
-AttachmentsFri, Mar 8, 9:09 PM (5 hours ago)
-	
-to Li
-Dr. Yang,
-
-Is this how you want Part I to be done for project 3? I decided to do it in Python instead of Java.
-
-Regards,
-Brandon Hough
-
-2 Attachments
-	
-	
-	
-
 #!/usr/bin/env python3
 # =============================================================
 # Created By  : Brandon Hough
