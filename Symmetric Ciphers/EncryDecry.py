@@ -17,6 +17,115 @@ import random
 import sys
 import os
 
+def encrypt_using_AES(mode,plaintext):
+	#Get a random set of 16 characters for the key
+	key = ''.join(chr(random.randint(0, 0xFF)) for i in range(16))
+
+	#Get a random set of 16 characters for the initialization vector
+	iv = ''.join([chr(random.randint(0, 0xFF)) for i in range(16)])
+
+	print("Encrypted Message")
+	print("="*24)
+	
+	if (mode == "ECB"):	
+		aes = AES.new(key, AES.MODE_ECB, iv)
+	if (mode == "CBC"):
+		aes = AES.new(key, AES.MODE_CBC, iv)
+	if (mode == "CFB"):
+		aes = AES.new(key, AES.MODE_CFB, iv)
+	if (mode == "OFB"):
+		aes = AES.new(key, AES.MODE_OFB, iv)
+	if (mode == "CTR"):
+		aes = AES.new(key, AES.MODE_OFB, iv)
+
+	encrypted_msg = aes.encrypt(plaintext)
+
+	#print out the hex for each decrypted letter
+	for letter in encrypted_msg:
+		sys.stdout.write((hex(ord(letter))[2:]))
+		sys.stdout.write("h ")
+
+	print("\n" + encrypted_msg)
+
+	output4 = ''
+	output4 = encrypted_msg
+	f = open('project3.txt','w')
+	f.write(output4 + "\n")
+	f.close()
+
+	decrypt_using_AES(encrypted_msg,key,iv,mode)
+	change_random_hex(encrypted_msg,key,iv,mode)
+
+def decrypt_using_AES(encrypted_msg,key,iv,mode):	
+	print("Decrypted Message")
+	print("="*24) 
+
+	mode = mode.upper()
+
+	if (mode == "ECB"):	
+		aes = AES.new(key, AES.MODE_ECB, iv)
+	if (mode == "CBC"):
+		aes = AES.new(key, AES.MODE_CBC, iv)
+	if (mode == "CFB"):
+		aes = AES.new(key, AES.MODE_CFB, iv)
+	if (mode == "OFB"):
+		aes = AES.new(key, AES.MODE_OFB, iv)
+	if (mode == "CTR"):
+		secret = os.urandom(8)
+		aes = AES.new(key, AES.MODE_CTR, iv, counter=lambda: secret)
+	
+	decrypted_msg = aes.decrypt(encrypted_msg)
+
+	#print out the hex for each decrypted letter
+	for letter in decrypted_msg:
+		sys.stdout.write((hex(ord(letter))[2:]))
+		sys.stdout.write("h ")
+	print('\n')
+	print(decrypted_msg)
+
+	output5 = ''
+	output5 = decrypted_msg
+	f = open('project3.txt','a+')
+	f.write(output5 + "\n")
+	f.close()
+
+def change_random_hex(encrypted_msg,key,iv,mode):
+
+	print("\nChanging Random Bit...")
+	index_num = random.randint(1,len(encrypted_msg)-1)
+	new_num = random.randint(0,99)
+	
+	encrypted_list = []
+	for letter in encrypted_msg:
+		encrypted_list.append((hex(ord(letter))[2:]))
+	
+	encrypted_list.pop(index_num )
+	encrypted_list.insert(index_num ,str(new_num))
+
+	print("Encrypted Message")
+	print("="*24) 
+
+	encrypted_msg = ''
+	for l in encrypted_list:
+		encrypted_msg = encrypted_msg + l
+
+	encrypt_msg = ''
+	for m in encrypted_list:
+		encrypt_msg = encrypt_msg + ' ' + m + 'h'
+	print(encrypt_msg)
+
+	encrypted_msg = encrypted_msg.decode("hex")
+	print('\n' + encrypted_msg)
+
+	output3 = ''
+	output3 = encrypted_msg
+	f = open('project3.txt','a+')
+	f.write(output3 + "\n")
+	f.close()
+
+	#decrypt_using_DES3(encrypted_msg,iv,key,mode)
+	decrypt_using_AES(encrypted_msg,iv,key,mode)
+
 def encrypt_using_DES3(mode, msg):
 	key = 'thisismykeyhomie'
 	iv = Random.new().read(DES3.block_size)
@@ -32,7 +141,7 @@ def encrypt_using_DES3(mode, msg):
 		cipher_encrypt = DES3.new(key,DES3.MODE_OFB,iv)
 
 	encrypted_msg = cipher_encrypt.encrypt(msg)
-	print("Encrypted Message (DES3)")
+	print("Encrypted Message")
 	print("="*24)
 	
 	#print out the hex for each encrypted letter
@@ -44,7 +153,7 @@ def encrypt_using_DES3(mode, msg):
 
 	output = ''
 	output = encrypted_msg
-	f = open('project3.txt','w')
+	f = open('project3.txt','a+')
 	f.write(output + "\n")
 	f.close()
 
@@ -53,13 +162,13 @@ def encrypt_using_DES3(mode, msg):
 
 def decrypt_using_DES3(encrypted_msg,iv,key,mode):
 
-	print("\nDecrypted Message (DES3)")
+	print("\nDecrypted Message")
 	print("="*24)
 
 	mode = mode.upper()
 
 	if (mode == "ECB"):	
-		cipher_decrypt = DES3.new(key, DES3.MODE_ECB, iv)
+		cipher_decrypt = DES3.new(key, DE.MODE_ECB, iv)
 	if (mode == "CBC"):
 		cipher_decrypt = DES3.new(key, DES3.MODE_CBC, iv)
 	if (mode == "CFB"):
@@ -76,80 +185,14 @@ def decrypt_using_DES3(encrypted_msg,iv,key,mode):
 	for letter in decrypted_msg:
 		sys.stdout.write((hex(ord(letter))[2:]))
 		sys.stdout.write("h ")
-	print("\n",decrypted_msg)
+	print("\n")
+	print(decrypted_msg)
 
 	output2 = ''
 	output2 = decrypted_msg
 	f = open('project3.txt','a+')
 	f.write(output2 + "\n")
 	f.close()
-
-def encrypt_using_AES(plaintext):
-	print("Encrypted Message (AES)")
-	print("="*24)
-	
-	#Get a random set of 16 characters for the key
-	key = ''.join(chr(random.randint(0, 0xFF)) for i in range(16))
-
-	#Get a random set of 16 characters for the initialization vector
-	iv = ''.join([chr(random.randint(0, 0xFF)) for i in range(16)])
-
-	aes = AES.new(key, AES.MODE_CBC, iv)
-	encrypted_msg = aes.encrypt(plaintext)
-
-	#print out the hex for each decrypted letter
-	for letter in encrypted_msg:
-		sys.stdout.write((hex(ord(letter))[2:]))
-		sys.stdout.write("h ")
-
-	decrypt_using_AES(encrypted_msg,key,iv)
-
-def decrypt_using_AES(encrypted_msg,key,iv):	
-	print("Decrypted Message (AES)")
-	print("="*24) 
-	aes = AES.new(key, AES.MODE_CBC, iv)
-	decrypted_msg = aes.decrypt(encrypted_msg)
-
-	#print out the hex for each decrypted letter
-	for letter in decrypted_msg:
-		sys.stdout.write((hex(ord(letter))[2:]))
-		sys.stdout.write("h ")
-	print('\n')
-
-def change_random_hex(encrypted_msg,key,iv,mode):
-
-	print("\nChanging Random Bit...")
-	index_num = random.randint(1,len(encrypted_msg)-1)
-	new_num = random.randint(0,99)
-	
-	encrypted_list = []
-	for letter in encrypted_msg:
-		encrypted_list.append((hex(ord(letter))[2:]))
-	
-	encrypted_list.pop(index_num )
-	encrypted_list.insert(index_num ,str(new_num))
-
-	print("Encrypted Message(DES3)")
-	print("="*24) 
-
-	encrypted_msg = ''
-	for l in encrypted_list:
-		encrypted_msg = encrypted_msg + l
-
-	encrypt_msg = ''
-	for m in encrypted_list:
-		encrypt_msg = encrypt_msg + ' ' + m + 'h'
-	print(encrypt_msg)
-
-	encrypted_msg = encrypted_msg.decode("hex")
-	print('\n' + encrypted_msg)
-
-	output3 = encrypted_msg
-	f = open('project3.txt','a+')
-	f.write(output3 + "\n")
-	f.close()
-
-	decrypt_using_DES3(encrypted_msg,iv,key,mode)
 
 def validate_input_des3(msg):
 	if(len(msg) % 8 != 0):
@@ -164,16 +207,16 @@ def validate_input_aes(msg):
 def main():
 	#Get intput from user for DES3 encryption
 	mode = raw_input('What algorithm mode would you want to use (ECB, CBC, CFB, OFB, or CTR)? ')	
-	msg = raw_input('\nPlease input text to encrypt (8 characters): ')
+	#msg = raw_input('\nPlease input text to encrypt (8 characters): ')
 
 	#Validate and encrypt input based on mode chosen
-	validate_input_des3(msg)
-	encrypt_using_DES3(mode, msg)
+	#validate_input_des3(msg)
+	#encrypt_using_DES3(mode, msg)
 
 	#Get input from user for AES encryption
 	msg = raw_input('\nPlease input text to encrypt (16 characters): ')
 	validate_input_aes(msg)
-	encrypt_using_AES(msg)
+	encrypt_using_AES(mode,msg)
 
 if __name__ == '__main__':
 	main()
