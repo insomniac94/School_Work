@@ -227,7 +227,6 @@ def main():
         mode = mode.upper()
         msg = raw_input('Please input text to encrypt (16 characters): ')
         msg = validate_input_aes(msg)
-	#print(msg)
         encrypt_using_AES(mode, msg, encrypt_std)
      
     if(encrypt_std == 'DES3'):
