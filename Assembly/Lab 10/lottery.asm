@@ -76,15 +76,15 @@ yellowBallMatch DWORD 0					   ; inital matched yellow ball found count of 0
 
 .code
 main proc
-	call Randomize						    ; re-seed generator with curr time
+	call Randomize					   ; re-seed generator with curr time
 
-    mWriteString OFFSET message1            ; print 'Mega Millions drawing results: ' to console
+    mWriteString OFFSET message1           		   ; print 'Mega Millions drawing results: ' to console
 
 	getRandomW1:
-        randomNumberGen 70					; get a random number from 0 to 70
-	    mov winningPicks.whiteBall1, eax	; move random number into winning structure
-	    call WriteDec						; write first random number to the screen
-	    mWriteSpace							; insert a space
+        randomNumberGen 70				   ; get a random number from 0 to 70
+	    mov winningPicks.whiteBall1, eax		   ; move random number into winning structure
+	    call WriteDec				   ; write first random number to the screen
+	    mWriteSpace					   ; insert a space
 
     getRandomW2:
 	    randomNumberGen 70					; get a random number from 0 to 70
