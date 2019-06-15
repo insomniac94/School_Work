@@ -75,8 +75,6 @@ while end <= length:
                 break
 ```
 # Output
-Here is some example out when using this script 
-1.
+Here are some output examples when running the script:
 ![alt text](Example2.PNG)
-2.
 ![alt text](Example3.PNG)
