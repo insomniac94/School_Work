@@ -52,10 +52,10 @@ def print_deciphered_msg(decrypted_msg, i):
 ```python
     length = len(decrypted_msg) 
 ```
-4.5 In this while loop, we will interate across the whole string till the full string is an English word. Let's say we have th
-decrypted string SDVV 
+4.5 In this while loop, we will interate across the whole string till the full string is an English word. Let's say we have the
+decrypted string for 'SDVV'. This function will check if 'SD' is a word, then 'SDV', then 'SDVV' (check the screenshot below for a visual). If this is not a word, then it will move to the next combination ('RCUU'), until a word deciphered string is found. When it does, the Deciphered string will be printed out. Keep in mind my script only words for larger decrypted messages. 
 
-![alt texthttps://ibb.co/r37YpPR)
+![alt text](Example1.png)
 
 ```python
 while end <= length:
@@ -74,3 +74,9 @@ while end <= length:
             else:
                 break
 ```
+# Output
+Here is some example out when using this script 
+1.
+![alt text](Example2.png)
+2.
+![alt text](Example3.png)
