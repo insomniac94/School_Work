@@ -23,49 +23,42 @@ main proc
      mov bl, 0                     		; control flag to specify doing addition of the first and second 80-bit integers
      call findAnswer				; call findAnswer procedure
 
-	 mov bl, 1                      	; change the control flag to specify doing subtraction of the third and forth 80-bit integers
-	 mov esi, OFFSET myArray + 20   	; esi points to the memory offset of the third operand
+     mov bl, 1                      		; change the control flag to specify doing subtraction of the third and forth 80-bit integers
+     mov esi, OFFSET myArray + 20   		; esi points to the memory offset of the third operand
      mov edi, OFFSET myArray + 30   		; edi points to the memory offset of the forth operand
      mov edx, OFFSET myArray + 50   		; edx is the offset of the location where the result of the subtraction will be stored
      call findAnswer				; call findAnswer procedure
 
-	 ;call DumpRegs				; dumps contents of registers
      mov esi, OFFSET myArray			; beginning offset of first number
      mov ecx, 10				; number of bytes the first number is 10
      mov ebx, TYPE myArray			; stores the type of bytes
      call DumpMem				; dumps memory for first number
 	 
-	 ;call DumpRegs				; dumps contents of registers
      mov esi, OFFSET myArray + 10   		; beginning offset of second number
      mov ecx, 10				; number of bytes the second number is 10
      mov ebx, TYPE myArray			; stores the type of bytes
      call DumpMem				; dumps memory for second number
 	 
-	 ;call DumpRegs				; dumps contents of registers
      mov esi, OFFSET myArray + 20  		; beginning offset of third number
      mov ecx, 10				; number of bytes the third number is 10
      mov ebx, TYPE myArray			; stores the type of bytes
      call DumpMem				; dumps memory for third number
 	 
-	 ;call DumpRegs				; dumps contents of registers
      mov esi, OFFSET myArray + 30   		; beginning offset of forth number
      mov ecx, 10				; number of bytes the forth number is 10
      mov ebx, TYPE myArray			; stores the type of bytes
      call DumpMem				; dumps memory for forth number
 	 
-	 ;call DumpRegs				; dumps contents of registers
      mov esi, OFFSET myArray + 40   		; beginning offset of addtion result number
      mov ecx, 10				; number of bytes of addition result is  is 10
      mov ebx, TYPE myArray			; stores the type of bytes
      call DumpMem				; dumps memory for addtion result number
-
-	 ;call DumpRegs				; dumps contents of registers
      mov esi, OFFSET myArray + 50   		; beginning offset of addition result number
      mov ecx, 10				; number of bytes of addition result is  is 10
      mov ebx, TYPE myArray			; stores the type of bytes
      call DumpMem				; dumps memory for addtion result number
 
-    call DumpRegs
+    call DumpRegs				; Dumps contents of registers
     call ReadInt				; keeps up the cmd window to see results of CallMem
     exit 
 main endp
