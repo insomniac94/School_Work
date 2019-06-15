@@ -53,7 +53,7 @@ calculateQuadFormula  proc c
 calculateDeterminant:
     fld varB                    ; push B onto FPU register stack
     fld varB                    ; push B onto FPU register stack
-	fmul                        ; calculates B^2 and stores answer in ST(0)
+	fmul                    ; calculates B^2 and stores answer in ST(0)
 		
     fld varA                    ; push A onto FPU register stack
     fld varC                    ; push C onto FPU register stack
@@ -76,7 +76,7 @@ calculateDeterminant:
 
 calculateRoots:
     fld determinate             ; push determinate onto the stack
-	fsqrt                       ; calcualte the square root of determinate
+	fsqrt                   ; calcualte the square root of determinate
                                 ; ST(0) stores sqrt(determinate)
 
     fld varB                    ; push varB to the FPU stack, ST(0)
@@ -97,14 +97,14 @@ calculateRoots:
 
     mov eax, root1              ; move root1 into eax register
     mov edi, [ebp + 20]         ; have edi point to where root1ptr is in memeory
-    mov [edi], eax				; store root1 into the address of root1ptr 
+    mov [edi], eax		; store root1 into the address of root1ptr 
 
     fld varB                    ; push varB to the FPU stack, ST(0)
                      
     fchs                        ; flip the sign of varB in ST(0)
 
     fld determinate             ; push determinate onto the stack
-	fsqrt                       ; calcualte the square root of determinate
+	fsqrt                   ; calcualte the square root of determinate
 
     fsub                        ; calculates (-b) - sqrt(determinate)
 
@@ -119,7 +119,7 @@ calculateRoots:
 
     mov eax, root2              ; move root2 into eax register
     mov edi, [ebp + 24]         ; have edi point to where root2ptr is in memeory
-    mov [edi], eax			    ; store root2 into the address of root2ptr
+    mov [edi], eax		; store root2 into the address of root2ptr
 
     mov eax, 0                  ; move 0 to eax since the input was not a complex number                  
 
