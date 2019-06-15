@@ -18,10 +18,6 @@ public class PostfixTree
 		String value;
 		double number;
 		boolean isOperand;
-		
-//		Extra Credit
-		String variable;
-		double varValue;
 	}
 
 	Stack<Node> stack = new Stack<Node>(); //create a new stack that holds Nodes
@@ -202,48 +198,7 @@ public class PostfixTree
 			}								//the right side counter + 1
 		}
 	}
-	
-	//Extra Credit - I cannot figure it out
-	/*public void pushVariable()
-	{
-		Node n = new Node();
-		n.variable = "x";
-		n.isOperand = true;
-		stack.push(n);
-	}
-	
-	public double evaluateVar(double variableVal)
-	{
-		Node n = stack.peek();
-		return(findEvaluateVar(variableVal, n));
-	}
-	
-	private double findEvaluateVar(double variableVal, Node n)
-	{		
-		double result = 0;
-		
-		if(n.isOperand)
-		{
-			return n.number;
-		}
-		else
-		{
-			if(n.left.equals("x"))
-			{
-				n.left = variableVal;
-			}
-			else if(n.right.equals("x"))
-			{
-				n.right = variableVal;
-			}
-			else
-			{
-				double L = findEvaluateVar(n.left);
-				double R = findEvaluateVar(n.right);
-			}
-			return result;
-		}
-	}*/}
+}
 
 
 
