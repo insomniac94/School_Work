@@ -77,6 +77,6 @@ while end <= length:
 # Output
 Here is some example out when using this script 
 1.
-![alt text](Example2.png)
+![alt text](Example2.PNG)
 2.
-![alt text](Example3.png)
+![alt text](Example3.PNG)
