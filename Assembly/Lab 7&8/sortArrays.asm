@@ -102,7 +102,7 @@ mov ebx, TYPE secondArray          ; stores the type of bytes in the second arra
 call DumpMem                       ; dumps memory for second array from Irvine number
 call Crlf                          ; character return
 
-call ReadInt					   ; keeps up the cmd window to see results of CallMem
+call ReadInt					             ; keeps up the cmd window to see results of CallMem
 
 exit
 main endp
@@ -116,7 +116,7 @@ main endp
 bubbleSort proc
 
 dec ecx                         ; ecx must be one less than the length of the array
-mov ebx, [esi]				    ; assume first value is the largest value
+mov ebx, [esi]				          ; assume first value is the largest value
 mov dl, 1                       ; set dl to 1 to ensure at least one pass through array
 
 outerLoop:
@@ -139,8 +139,8 @@ changePositions:
      mov dl, 1                  ; set flag that this pass through array had changes occur
      
 nextPair:
-     .if (ebx <= [esi + 4])    ; if ebx is less or equal to then the value at esi + 4
-     mov ebx, [esi + 4]        ; then make ebx that value at esi + 4
+     .if (ebx <= [esi + 4])     ; if ebx is less or equal to then the value at esi + 4
+     mov ebx, [esi + 4]         ; then make ebx that value at esi + 4
      .endif
 
      add esi, 4                 ; move esi to the next value in memory (4 = DWORD)
