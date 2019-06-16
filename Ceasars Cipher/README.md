@@ -76,5 +76,9 @@ while end <= length:
 ```
 # Output
 Here are some output examples when running the script:
+
+OTWEWNGWCBPQABIZVQAPMLJGZWTTQVOBQUMAPMIDGZCA
 ![alt text](Example2.PNG)
+
+EQVBMZLZIZMLAXZQVOQVLMMXAVWEIVLLIZSNZWAB
 ![alt text](Example3.PNG)
